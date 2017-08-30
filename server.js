@@ -31,7 +31,8 @@ var requestHandler = function(request, response) {
    }
 };
 
-server = http.createServer(requestHandler);
+server = http.createServer(requestHandler).listen(port);
+console.log('server listening on: http://localhost:' + port);
 
 fs.readFile('listings.json', 'utf8', function(err, data) {
   /*
@@ -41,6 +42,4 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
    if (err) throw err;
    listingData = data;
 
-   server.listen(port);
-   console.log('server listening on: http://localhost:' + port);
 });
