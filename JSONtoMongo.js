@@ -9,6 +9,8 @@ var fs = require('fs'),
   Listing = require('./ListingSchema.js'),
   config = require('./config');
 
+mongoose.connect(config.db.uri);
+
 var listingData;
 fs.readFile('listings.json', 'utf8', function(err, data) {
   /*
@@ -22,23 +24,36 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
   console.log(count);
 
   for (var entry = 0; entry < count; entry++) {
-    var newEntry = new Listing({
-      code: listingData.entries[entry].code,
-      name: listingData.entries[entry].name,
-      coordinates: {
-        latitude: listingData.entries[entry].coordinates.latitude,
-        longitude: listingData.entries[entry].coordinates.longitude,
-      },
-      address: listingData.entries[entry].address
-    });
-console.log(newEntry);
-    // save the user
-    newEntry.save(function(err) {
-      if (err)
-        throw err;
+    if (listingData.entries[entry].coordinates && listingData.entries[entry].address) {
+      var newEntry = new Listing({
+        code: listingData.entries[entry].code,
+        name: listingData.entries[entry].name,
+        coordinates: {
+          latitude: listingData.entries[entry].coordinates.latitude,
+          longitude: listingData.entries[entry].coordinates.longitude
+        },
+        address: listingData.entries[entry].address
+      });
+      console.log('1');
+      // save the user
+      newEntry.save(function(err, listing) {
+        if (err)
+          throw err;
 
-      console.log('User created!');
-    });
+        console.log('1User created!');
+      });
+    } else{
+      var newEntry = new Listing({code: listingData.entries[entry].code, name: listingData.entries[entry].name});
+      console.log('4');
+      // save the user
+      newEntry.save(function(err, listing) {
+        if (err)
+          throw err;
+
+        console.log('4User created!');
+      });
+    }
+
   }
 
   console.log('done');
