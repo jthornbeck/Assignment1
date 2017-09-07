@@ -7,7 +7,7 @@ var fs = require('fs'),
   mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   Listing = require('./ListingSchema.js'),
-  config = require('./config');
+  config = require('./config.example');
 
 mongoose.connect(config.db.uri);
 /* Fill out these functions using Mongoose queries*/
