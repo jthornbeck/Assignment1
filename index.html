@@ -37,10 +37,11 @@
                       * include a way to remove individual listings
 
                 -->
-            <tr ng-repeat="entries in listings | filter:filtering" ng-click="showDetails(entries)">
+            <tr ng-repeat="entries in listings | filter:filtering">
               <td>{{entries.code}}</td>
               <td>{{entries.name}}</td>
-              <td><button ng-click="deleteListing(entries)" class="glyphicon glyphicon-trash">Delete</button></td>
+              <td><button class="btn glyphicon glyphicon-globe" ng-click="showDetails(entries)">Details</button></td>
+              <td><button class="btn glyphicon glyphicon-trash" ng-click="deleteListing(entries)">Delete</button></td>
             </tr>
           </table>
         </div>
