@@ -28,3 +28,4 @@ Instructions:
 3. Ensure your schema passes the tests by running `mocha listing.model.test.js`
 4. Fill out the `JSONtoMongo.js` script to add the listings to your database
 5. Complete the functions in `queries.js`
+# Assignment
